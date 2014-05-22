@@ -107,6 +107,48 @@ def get_item(exchange_id, format=u"Default"):
   )
   return root
 
+def search_appointments(folder_id, change_key, date, max_entries=100):
+  """
+    <m:FindItem Traversal="Shallow">
+      <m:ItemShape>
+        <t:BaseShape>IdOnly</t:BaseShape>
+        <t:AdditionalProperties>
+          <t:FieldURI FieldURI="item:Subject" />
+          <t:FieldURI FieldURI="calendar:Start" />
+          <t:FieldURI FieldURI="calendar:End" />
+        </t:AdditionalProperties>
+      </m:ItemShape>
+      <m:CalendarView MaxEntriesReturned="{{max_entries}}" StartDate="{{date}}" EndDate="{{date}}" />
+      <m:ParentFolderIds>
+        <t:FolderId Id="AAMk" ChangeKey="AgAA" />
+      </m:ParentFolderIds>
+    </m:FindItem>
+  """
+  
+  day_start = day_end = date
+  day_start = day_start.replace(hour=0, minute=0, second=0)
+  day_end = day_end.replace(hour=23, minute=59, second=59)
+  
+  day_start = convert_datetime_to_utc(day_start)
+  day_end = convert_datetime_to_utc(day_end)
+
+  root = M.FindItem(
+    {u'Traversal': u'Shallow'},
+    M.ItemShape(
+      T.BaseShap(u'IdOnly'),
+      T.AdditionalProperties(
+        T.FieldURI({u'FieldURI': u'item:Subject'}),
+        T.FieldURI({u'FieldURI': u'calendar:Start'}),
+        T.FieldURI({u'FieldURI': u'calendar:End'})
+        )
+      ),
+      M.CalendarView(MaxEntriesReturned=max_entries, StartDate=day_start, EndDate=day_end), # TODO: Set start and end date appropriately
+      M.ParentFolderIds(
+        T.FolderId(Id=folder_id, ChangeKey=change_key))
+    );
+
+  return root
+
 
 def get_folder(folder_id, format=u"Default"):
 
