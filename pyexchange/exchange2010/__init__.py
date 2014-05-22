@@ -444,6 +444,25 @@ class Exchange2010Folder(BaseExchangeFolder):
     self.parent_id = folder_id
     return self
 
+  def get_appointments(self, day):
+    if not day:
+      raise TypeError(u"Must specify day to search for appointments.")
+
+    if self.folder_type == u'CalendarFolder':
+      raise TypeError(u"You can't search a non-calendar folder for appointments.")
+      
+    if not self.id:
+      raise TypeError(u"You can't search in a folder that hasn't been created yet.")
+
+    if not self.change_key:
+      raise TypeError(u"You can't search in a folder without a change key.")
+    
+    body = soap_request.search_appointments(self.id, self.change_key, day)
+    response = self.service.send(body)
+    print response
+
+    
+
   def _parse_response_for_get_folder(self, response):
     FOLDER_PATH = u'//t:Folder | //t:CalendarFolder | //t:ContactsFolder | //t:SearchFolder | //t:TasksFolder'
 

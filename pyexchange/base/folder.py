@@ -51,6 +51,9 @@ class BaseExchangeFolder(object):
   def delete(self):
     raise NotImplementedError
 
+  def get_appointments(self, day):
+    raise NotImplementedError
+
   @property
   def id(self):
     """ **Read-only.** The internal id Exchange uses to refer to this folder. """
