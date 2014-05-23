@@ -46,7 +46,7 @@ class BaseExchangeFolder(object):
     raise NotImplementedError
 
   def update(self):
-    raise NotImplementedError
+    raise NotImplementedErrorls
 
   def delete(self):
     raise NotImplementedError
