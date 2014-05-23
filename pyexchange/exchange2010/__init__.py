@@ -373,6 +373,7 @@ class Exchange2010FolderService(BaseExchangeFolderService):
       raise TypeError(u"Must specify day to search for appointments.")
 
     folder = self.find_folder(id);
+    print folder
 
     if folder.folder_type == u'CalendarFolder':
       raise TypeError(u"You can't search a non-calendar folder for appointments.")
