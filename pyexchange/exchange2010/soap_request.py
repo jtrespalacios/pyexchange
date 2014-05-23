@@ -127,6 +127,7 @@ def search_appointments(folder_id, date, max_entries=100):
   """
   
   day_start = day_end = date
+  print type(day_start).__name__
   day_start = day_start.replace(hour=0, minute=0, second=0)
   day_end = day_end.replace(hour=23, minute=59, second=59)
   
