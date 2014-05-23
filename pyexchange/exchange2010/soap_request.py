@@ -107,7 +107,7 @@ def get_item(exchange_id, format=u"Default"):
   )
   return root
 
-def search_appointments(folder_id, change_key, date, max_entries=100):
+def search_appointments(folder_id, date, max_entries=100):
   """
     <m:FindItem Traversal="Shallow">
       <m:ItemShape>
@@ -120,7 +120,7 @@ def search_appointments(folder_id, change_key, date, max_entries=100):
       </m:ItemShape>
       <m:CalendarView MaxEntriesReturned="{{max_entries}}" StartDate="{{date}}" EndDate="{{date}}" />
       <m:ParentFolderIds>
-        <t:FolderId Id="AAMk" ChangeKey="AgAA" />
+        <t:FolderId Id="{{folder_id}}" ChangeKey="AgAA" /> # Ignoring ChangeKey
       </m:ParentFolderIds>
     </m:FindItem>
   """
@@ -144,7 +144,7 @@ def search_appointments(folder_id, change_key, date, max_entries=100):
       ),
       M.CalendarView(MaxEntriesReturned=max_entries, StartDate=day_start, EndDate=day_end), # TODO: Set start and end date appropriately
       M.ParentFolderIds(
-        T.FolderId(Id=folder_id, ChangeKey=change_key))
+        T.FolderId(Id=folder_id))
     );
 
   return root
