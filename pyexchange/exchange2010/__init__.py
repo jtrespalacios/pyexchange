@@ -85,6 +85,14 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
   def new_event(self, **properties):
     return Exchange2010CalendarEvent(service=self.service, calendar_id=self.calendar_id, **properties)
 
+  def get_events(self, day):
+    if not day:
+      raise TypeError(u"Must specify day to search for appointments.")
+    
+    body = soap_request.search_appointments(self.calendar_id, self.change_key, day)
+    response = self.service.send(body)
+    print response
+
 
 class Exchange2010CalendarEvent(BaseExchangeCalendarEvent):
 
@@ -367,26 +375,6 @@ class Exchange2010FolderService(BaseExchangeFolderService):
     body = soap_request.find_folder(parent_id=parent_id, format=u'AllProperties')
     response_xml = self.service.send(body)
     return self._parse_response_for_find_folder(response_xml)
-
-  def get_appointments(self, day, id):
-    if not day:
-      raise TypeError(u"Must specify day to search for appointments.")
-
-    folder = self.service.folder().find_folder(id);
-    print folder
-
-    if folder.folder_type == u'CalendarFolder':
-      raise TypeError(u"You can't search a non-calendar folder for appointments.")
-      
-    if not folder.id:
-      raise TypeError(u"You can't search in a folder that hasn't been created yet.")
-
-    if not folder.change_key:
-      raise TypeError(u"You can't search in a folder without a change key.")
-    
-    body = soap_request.search_appointments(folder.id, folder.change_key, day)
-    response = self.service.send(body)
-    print response
 
   def _parse_response_for_find_folder(self, response):
 

@@ -6,9 +6,6 @@ class BaseExchangeFolderService(object):
   def get_folder(self, id, *args, **kwargs):
     raise NotImplementedError
 
-  def get_appointments(self, day):
-    raise NotImplementedError
-
 class BaseExchangeFolder(object):
 
   _id = None
@@ -48,7 +45,7 @@ class BaseExchangeFolder(object):
     raise NotImplementedError
 
   def update(self):
-    raise NotImplementedErrorls
+    raise NotImplementedError
 
   def delete(self):
     raise NotImplementedError
