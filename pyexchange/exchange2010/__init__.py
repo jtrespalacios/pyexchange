@@ -372,7 +372,7 @@ class Exchange2010FolderService(BaseExchangeFolderService):
     if not day:
       raise TypeError(u"Must specify day to search for appointments.")
 
-    folder = self.find_folder(id);
+    folder = self.service.find_folder(id);
     print folder
 
     if folder.folder_type == u'CalendarFolder':
