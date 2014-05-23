@@ -6,6 +6,7 @@ Unless required by applicable law or agreed to in writing, software?distributed 
 """
 from lxml.builder import ElementMaker
 from ..utils import convert_datetime_to_utc
+import datetime
 
 MSG_NS = u'http://schemas.microsoft.com/exchange/services/2006/messages'
 TYPE_NS = u'http://schemas.microsoft.com/exchange/services/2006/types'
