@@ -88,7 +88,7 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
   def get_events(self, day):
     if not day:
       raise TypeError(u"Must specify day to search for appointments.")
-    
+    print type(self)
     body = soap_request.search_appointments(self.calendar_id, self._change_key, day)
     response = self.service.send(body)
     print response
