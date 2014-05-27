@@ -140,7 +140,9 @@ def search_appointments(folder_id, change_key, date, max_entries=100):
       T.AdditionalProperties(
         T.FieldURI({u'FieldURI': u'item:Subject'}),
         T.FieldURI({u'FieldURI': u'calendar:Start'}),
-        T.FieldURI({u'FieldURI': u'calendar:End'})
+        T.FieldURI({u'FieldURI': u'calendar:End'}),
+        T.FieldURI({u'FieldURI': u'calendar:Location'}),
+        T.FieldURI({u'FieldURI': u'item:Body'})
         )
       ),
       M.CalendarView(
@@ -155,8 +157,6 @@ def search_appointments(folder_id, change_key, date, max_entries=100):
         )
       )
     )
-
-  print(etree.tostring(root, pretty_print=True))
 
   return root
 
