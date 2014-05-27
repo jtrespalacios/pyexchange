@@ -97,9 +97,9 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
     result = []
     if items:
       property_map = {
-          u'subject': { u'xpath' : u't:CalendarItem/t:Subject'},
-          u'start_time': { u'xpath' : u't:CalendarItem/t:Start'},
-          u'end_time': { u'xpath' : u't:CalendarItem/t:End'}
+          u'subject': { u'xpath' : u't:Subject'},
+          u'start_time': { u'xpath' : u't:Start'},
+          u'end_time': { u'xpath' : u't:End'}
         }
       for item in items:
         print(etree.tostring(item, pretty_print=True))
