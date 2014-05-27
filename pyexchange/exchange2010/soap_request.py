@@ -145,8 +145,9 @@ def search_appointments(folder_id, date, max_entries=100):
       ),
       M.CalendarView(MaxEntriesReturned=str(max_entries), StartDate=day_start.strftime(EXCHANGE_DATE_FORMAT), EndDate=day_end.strftime(EXCHANGE_DATE_FORMAT)),
       M.ParentFolderIds(
-        T.FolderId(Id=folder_id))
-    );
+        T.FolderId(Id=folder_id)
+      )
+    )
 
   print root
 
