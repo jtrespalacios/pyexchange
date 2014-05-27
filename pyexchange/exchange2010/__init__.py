@@ -94,12 +94,19 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
     print(etree.tostring(response, pretty_print=True))
     
     items = response.xpath(u'//t:Items/t:CalendarItem', namespaces=soap_request.NAMESPACES)
-    print items
+    result = []
+    if items:
+      property_map = {
+          u'subject': { u'xpath' : u't:CalendarItem/t:Subject'},
+          u'start_time': { u'xpath' : u't:CalendarItem/t:Start'},
+          u'end_time': { u'xpath' : u't:CalendarItem/t:End'}
+        }
+      for item in items:
+        print(etree.tostring(item, pretty_print=True))
+        result.append(self.service._xpath_to_dict(item, property_map, soap_request.NAMESPACES))
 
-    for item in items:
-      print(etree.tostring(item, pretty_print=True))
-
-    return items
+    print result
+    return result
 
 
 class Exchange2010CalendarEvent(BaseExchangeCalendarEvent):
