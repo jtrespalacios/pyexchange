@@ -4,6 +4,7 @@ Licensed under the Apache License, Version 2.0 (the "License");?you may not use 
 
 Unless required by applicable law or agreed to in writing, software?distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 """
+from lxml import etree
 from lxml.builder import ElementMaker
 from ..utils import convert_datetime_to_utc
 import datetime
@@ -133,8 +134,7 @@ def search_appointments(folder_id, date, max_entries=100):
   day_start = convert_datetime_to_utc(day_start)
   day_end = convert_datetime_to_utc(day_end)
 
-  root = M.FindItem(
-    {u'Traversal': u'Shallow'},
+  root = M.FindItem({u'Traversal': u'Shallow'},
     M.ItemShape(
       T.BaseShap(u'IdOnly'),
       T.AdditionalProperties(
@@ -149,7 +149,7 @@ def search_appointments(folder_id, date, max_entries=100):
       )
     )
 
-  print root
+  print(etree.tostring(root, pretty_print=True))
 
   return root
 

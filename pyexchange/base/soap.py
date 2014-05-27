@@ -28,8 +28,6 @@ class ExchangeServiceSOAP(object):
 
   def send(self, xml, headers=None, retries=4, timeout=30, encoding="utf-8"):
     request_xml = self._wrap_soap_xml_request(xml)
-    print u'Request xml'
-    print request_xml
     log.info(etree.tostring(request_xml, encoding=encoding, pretty_print=True))
     response = self._send_soap_request(request_xml, headers=headers, retries=retries, timeout=timeout, encoding=encoding)
     return self._parse(response, encoding=encoding)
