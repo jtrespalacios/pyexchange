@@ -90,9 +90,7 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
       raise TypeError(u"Must specify day to search for appointments.")
 
     body = soap_request.search_appointments(calendar_id, change_key, day)
-    response = self.service.send(body)
-    print(etree.tostring(response, pretty_print=True))
-    
+    response = self.service.send(body)    
     items = response.xpath(u'//t:Items/t:CalendarItem', namespaces=soap_request.NAMESPACES)
     result = []
     if items:
@@ -102,10 +100,8 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
           u'end_time': { u'xpath' : u't:End'}
         }
       for item in items:
-        print(etree.tostring(item, pretty_print=True))
         result.append(self.service._xpath_to_dict(item, property_map, soap_request.NAMESPACES))
 
-    print result
     return result
 
 
