@@ -136,7 +136,7 @@ def search_appointments(folder_id, change_key, date, max_entries=100):
 
   root = M.FindItem({u'Traversal': u'Shallow'},
     M.ItemShape(
-      T.BaseShap(u'IdOnly'),
+      T.BaseShape(u'IdOnly'),
       T.AdditionalProperties(
         T.FieldURI({u'FieldURI': u'item:Subject'}),
         T.FieldURI({u'FieldURI': u'calendar:Start'}),
