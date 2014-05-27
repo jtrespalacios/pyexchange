@@ -92,7 +92,7 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
     body = soap_request.search_appointments(calendar_id, change_key, day)
     response = self.service.send(body)
     
-    items = response.xpath(u'//m:Items/t:CalendarItem', namespaces=soap_request.NAMESPACES)
+    items = response.xpath(u'//m:Items', namespaces=soap_request.NAMESPACES)
     print items
     for item in items:
       print(etree.tostring(item, pretty_print=True))
