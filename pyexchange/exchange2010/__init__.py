@@ -91,7 +91,7 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
     print type(self)
     body = soap_request.search_appointments(calendar_id, change_key, day)
     response = self.service.send(body)
-    print response
+    print(etree.tostring(response, pretty_print=True))
 
 
 class Exchange2010CalendarEvent(BaseExchangeCalendarEvent):
