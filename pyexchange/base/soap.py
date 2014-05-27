@@ -54,7 +54,7 @@ class ExchangeServiceSOAP(object):
 
     if fault_nodes:
       print 'soap fault found'
-      print xml_tree
+      print etree.tostring(xml_tree, pretty_print=True)
       fault = fault_nodes[0]
       raise FailedExchangeException(u"SOAP Fault from Exchange server", fault.text)
 
