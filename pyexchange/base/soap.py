@@ -53,6 +53,8 @@ class ExchangeServiceSOAP(object):
     fault_nodes = xml_tree.xpath(u'//s:Fault', namespaces=SOAP_NAMESPACES)
 
     if fault_nodes:
+      print 'soap fault found'
+      print xml_tree
       fault = fault_nodes[0]
       raise FailedExchangeException(u"SOAP Fault from Exchange server", fault.text)
 
