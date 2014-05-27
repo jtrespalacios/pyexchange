@@ -148,6 +148,8 @@ def search_appointments(folder_id, date, max_entries=100):
         T.FolderId(Id=folder_id))
     );
 
+  print root
+
   return root
 
 
