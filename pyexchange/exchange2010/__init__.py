@@ -95,9 +95,9 @@ class Exchange2010CalendarService(BaseExchangeCalendarService):
     result = []
     if items:
       property_map = {
-          u'subject': { u'xpath' : u't:Subject'},
-          u'start_time': { u'xpath' : u't:Start'},
-          u'end_time': { u'xpath' : u't:End'}
+          'subject': { u'xpath' : u't:Subject'},
+          'start_time': { u'xpath' : u't:Start'},
+          'end_time': { u'xpath' : u't:End'}
         }
       for item in items:
         result.append(self.service._xpath_to_dict(item, property_map, soap_request.NAMESPACES))
